@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-
+const icons = ["fa fa-android", "fa fa-angular", "fa fa-apple", "fa fa-css3", "fa fa-react", "fa fa-windows", "fa fa-google-drive", "fa fa-qq", "fa fa-android", "fa fa-angular", "fa fa-apple", "fa fa-css3", "fa fa-react", "fa fa-windows", "fa fa-google-drive", "fa fa-qq"];
 
 /*
  * Display the cards on the page
