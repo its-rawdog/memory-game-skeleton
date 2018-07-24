@@ -3,6 +3,15 @@
  */
 const icons = ["fa fa-android", "fa fa-angular", "fa fa-apple", "fa fa-css3", "fa fa-react", "fa fa-windows", "fa fa-google-drive", "fa fa-qq", "fa fa-android", "fa fa-angular", "fa fa-apple", "fa fa-css3", "fa fa-react", "fa fa-windows", "fa fa-google-drive", "fa fa-qq"];
 
+//create the cards
+const cardsContainer = document.querySelector(".deck");
+
+for (let i =0; i < icons.length; i++){
+  const card = document.createElement("div");
+  card.classList.add("card");
+  cardsContainer.appendChild(card);
+}
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
