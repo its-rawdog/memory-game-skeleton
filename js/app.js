@@ -7,8 +7,9 @@ const icons = ["fa fa-android", "fa fa-angular", "fa fa-apple", "fa fa-css3", "f
 const cardsContainer = document.querySelector(".deck");
 
 for (let i =0; i < icons.length; i++){
-  const card = document.createElement("div");
+  const card = document.createElement("li");
   card.classList.add("card");
+  card.innerHTML = `<i class="${icons[i]}"></i>`;
   cardsContainer.appendChild(card);
 }
 
