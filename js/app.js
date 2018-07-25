@@ -50,7 +50,7 @@ function compare(currentCard, previousCard){
     setTimeout(function(){
     currentCard.classList.remove("open", "show", "disable");
     previousCard.classList.remove("open", "show", "disable");
-    }, 1000);
+  }, 700);
   openedCards = [];
   }
   addMove()
@@ -102,40 +102,12 @@ restartBtn.addEventListener("click", function(){
   matchedCards = [];
   moves = 0;
   movesContainer.innerHTML = moves;
+  shuffle(icons);
 })
 //////////////////Start Game for first time
+shuffle(icons);
 init();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//////////////////////////////////UDACITY SHUFFLE CODE/////////////////////////
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -144,18 +116,18 @@ init();
  */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+function shuffle(icons) {
+    var currentIndex = icons.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
+        temporaryValue = icons[currentIndex];
+        icons[currentIndex] = icons[randomIndex];
+        icons[randomIndex] = temporaryValue;
     }
 
-    return array;
+    return icons;
 }
 
 

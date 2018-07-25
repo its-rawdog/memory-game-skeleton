@@ -40,7 +40,7 @@ h1 {
 .deck {
     width: 660px;
     min-height: 680px;
-    background: linear-gradient(160deg, #65c4fe 0%, #8e50d3 100%);
+    background: linear-gradient(160deg, #ff4b1f 0%, #1fddff 100%);
     padding: 32px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
@@ -54,7 +54,7 @@ h1 {
 .deck .card {
     height: 125px;
     width: 125px;
-    background: #2e3d49;
+    background: #2C5364;
     font-size: 0px;
     color: #ffffff;
     border-radius: 8px;
@@ -77,7 +77,7 @@ h1 {
 
 .deck .card.match {
     cursor: default;
-    background: #02ccba;
+    background: #34e89e;
     font-size: 33px;
 }
 .deck .card.disable{
