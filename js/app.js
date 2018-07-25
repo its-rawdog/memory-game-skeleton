@@ -2,82 +2,139 @@
  * Create a list that holds all of your cards
  */
 const icons = ["fa fa-android", "fa fa-bomb", "fa fa-apple", "fa fa-css3", "fa fa-diamond", "fa fa-windows", "fa fa-bolt", "fa fa-qq", "fa fa-android", "fa fa-bomb", "fa fa-apple", "fa fa-css3", "fa fa-diamond", "fa fa-windows", "fa fa-bolt", "fa fa-qq"];
-
+const cardsContainer = document.querySelector(".deck");
 let openedCards = [];
 let matchedCards = [];
-
-//create the cards
-const cardsContainer = document.querySelector(".deck");
-
-for (let i =0; i < icons.length; i++){
-  const card = document.createElement("li");
-  card.classList.add("card");
-  card.innerHTML = `<i class="${icons[i]}"></i>`;
-  cardsContainer.appendChild(card);
-
-//add click event to each card
-click(card);
+/*
+*Initialize the game
+*/
+function init() {
+  for (let i =0; i < icons.length; i++){
+    const card = document.createElement("li");
+    card.classList.add("card");
+    card.innerHTML = `<i class="${icons[i]}"></i>`;
+    cardsContainer.appendChild(card);
+    click(card);
+  }
 }
-
 /*
 *click event
 */
-
 function click(card){
-  //card click event
   card.addEventListener("click", function() {
-
     const currentCard = this;
     const previousCard = openedCards[0];
-
-    //existing OPENED card
     if (openedCards.length === 1){
-
-        card.classList.add("open", "show");
+        card.classList.add("open", "show", "disable");
         openedCards.push(this);
-
-        //compare 2 open cards
-        if (currentCard.innerHTML === previousCard.innerHTML){
-
-          //matchedCards
-          currentCard.classList.add("match");
-          previousCard.classList.add("match");
-
-          matchedCards.push(currentCard, previousCard);
-
-          openedCards = [];
-
-          //check if game is isOver
-          isOver();
-
-        } else {
-
-          setTimeout(function(){
-            currentCard.classList.remove("open", "show");
-            previousCard.classList.remove("open", "show");
-            openedCards = [];
-          }, 1000);
-
-
-        }
-
-    } else{
-      //we dont have any open cards
-
-        currentCard.classList.add("open", "show");
-        openedCards.push(this);
-
+        compare(currentCard, previousCard);
     }
-
+    else{
+        currentCard.classList.add("open", "show", "disable");
+        openedCards.push(this);
+    }
   });
 }
-
-//ending the Game
+/*
+*Compare cards
+*/
+function compare(currentCard, previousCard){
+  if (currentCard.innerHTML === previousCard.innerHTML){
+    currentCard.classList.add("match");
+    previousCard.classList.add("match");
+    matchedCards.push(currentCard, previousCard);
+    openedCards = [];
+    isOver();
+  }
+  else {
+    setTimeout(function(){
+    currentCard.classList.remove("open", "show", "disable");
+    previousCard.classList.remove("open", "show", "disable");
+    }, 1000);
+  openedCards = [];
+  }
+  addMove()
+}
+/*
+*ending the game
+*/
 function isOver (){
   if (matchedCards.length === icons.length){
     alert("Booya!");
   }
 }
+/*
+*Move counter
+*/
+const movesContainer = document.querySelector(".moves");
+let moves = 0;
+movesContainer.innerHTML = 0;
+function addMove (){
+  moves++;
+  movesContainer.innerHTML = moves;
+  rating();
+}
+/*
+*Rating
+*/
+const starsContainer = document.querySelector(".stars");
+function rating(){
+  switch(moves) {
+    case 20:
+      starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
+      <li><i class="fa fa-star"></i></li>`;
+    break;
+    case 25:
+      starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>`;
+    break;
+    case 30:
+      starsContainer.innerHTML = `<li><i class="fa fa-bomb"></i></li>`;
+    break;
+  }
+}
+/*
+*Restart Button
+*/
+const restartBtn = document.querySelector(".restart");
+restartBtn.addEventListener("click", function(){
+  cardsContainer.innerHTML = "";
+  init();
+  matchedCards = [];
+  moves = 0;
+  movesContainer.innerHTML = moves;
+})
+//////////////////Start Game for first time
+init();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
  * Display the cards on the page
