@@ -4,6 +4,7 @@
 const icons = ["fa fa-android", "fa fa-bomb", "fa fa-apple", "fa fa-css3", "fa fa-diamond", "fa fa-windows", "fa fa-bolt", "fa fa-qq", "fa fa-android", "fa fa-bomb", "fa fa-apple", "fa fa-css3", "fa fa-diamond", "fa fa-windows", "fa fa-bolt", "fa fa-qq"];
 
 let openedCards = [];
+let matchedCards = [];
 
 //create the cards
 const cardsContainer = document.querySelector(".deck");
@@ -17,6 +18,9 @@ for (let i =0; i < icons.length; i++){
   //card click event
   card.addEventListener("click", function() {
 
+    const currentCard = this;
+    const previousCard = openedCards[0];
+
     //existing OPENED card
     if (openedCards.length === 1){
 
@@ -24,21 +28,42 @@ for (let i =0; i < icons.length; i++){
         openedCards.push(this);
 
         //compare 2 open cards
-        if (this.innerHTML === openedCards[0].innerHTML){
-          console.log("Matched!");
+        if (currentCard.innerHTML === previousCard.innerHTML){
+
+          //matchedCards
+          currentCard.classList.add("match");
+          previousCard.classList.add("match");
+
+          matchedCards.push(currentCard, previousCard);
+
+          openedCards = [];
+
+          //check if game is isOver
+          isOver();
+
         }else{
-          console.log("Nope");
+          currentCard.classList.remove("open", "show");
+          previousCard.classList.remove("open", "show");
+
+          openedCards = [];
         }
 
     } else{
       //we dont have any open cards
 
-        card.classList.add("open", "show");
+        currentCard.classList.add("open", "show");
         openedCards.push(this);
 
     }
 
   });
+}
+
+//ending the Game
+function isOver (){
+  if (matchedCards.length === icons.length){
+    alert("Booya!");
+  }
 }
 
 /*
