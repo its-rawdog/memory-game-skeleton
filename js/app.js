@@ -15,6 +15,15 @@ for (let i =0; i < icons.length; i++){
   card.innerHTML = `<i class="${icons[i]}"></i>`;
   cardsContainer.appendChild(card);
 
+//add click event to each card
+click(card);
+}
+
+/*
+*click event
+*/
+
+function click(card){
   //card click event
   card.addEventListener("click", function() {
 
@@ -41,11 +50,15 @@ for (let i =0; i < icons.length; i++){
           //check if game is isOver
           isOver();
 
-        }else{
-          currentCard.classList.remove("open", "show");
-          previousCard.classList.remove("open", "show");
+        } else {
 
-          openedCards = [];
+          setTimeout(function(){
+            currentCard.classList.remove("open", "show");
+            previousCard.classList.remove("open", "show");
+            openedCards = [];
+          }, 1000);
+
+
         }
 
     } else{
