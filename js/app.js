@@ -1,7 +1,9 @@
 /*
  * Create a list that holds all of your cards
  */
-const icons = ["fa fa-android", "fa fa-angular", "fa fa-apple", "fa fa-css3", "fa fa-react", "fa fa-windows", "fa fa-google-drive", "fa fa-qq", "fa fa-android", "fa fa-angular", "fa fa-apple", "fa fa-css3", "fa fa-react", "fa fa-windows", "fa fa-google-drive", "fa fa-qq"];
+const icons = ["fa fa-android", "fa fa-bomb", "fa fa-apple", "fa fa-css3", "fa fa-diamond", "fa fa-windows", "fa fa-bolt", "fa fa-qq", "fa fa-android", "fa fa-bomb", "fa fa-apple", "fa fa-css3", "fa fa-diamond", "fa fa-windows", "fa fa-bolt", "fa fa-qq"];
+
+let openedCards = [];
 
 //create the cards
 const cardsContainer = document.querySelector(".deck");
@@ -11,6 +13,32 @@ for (let i =0; i < icons.length; i++){
   card.classList.add("card");
   card.innerHTML = `<i class="${icons[i]}"></i>`;
   cardsContainer.appendChild(card);
+
+  //card click event
+  card.addEventListener("click", function() {
+
+    //existing OPENED card
+    if (openedCards.length === 1){
+
+        card.classList.add("open", "show");
+        openedCards.push(this);
+
+        //compare 2 open cards
+        if (this.innerHTML === openedCards[0].innerHTML){
+          console.log("Matched!");
+        }else{
+          console.log("Nope");
+        }
+
+    } else{
+      //we dont have any open cards
+
+        card.classList.add("open", "show");
+        openedCards.push(this);
+
+    }
+
+  });
 }
 
 /*
