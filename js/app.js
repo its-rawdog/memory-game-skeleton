@@ -1,14 +1,19 @@
 /*
- * Create a list that holds all of your cards
+ * List for all the cards
  */
 const icons = ["fa fa-android", "fa fa-bomb", "fa fa-apple", "fa fa-css3", "fa fa-diamond", "fa fa-windows", "fa fa-bolt", "fa fa-qq", "fa fa-android", "fa fa-bomb", "fa fa-apple", "fa fa-css3", "fa fa-diamond", "fa fa-windows", "fa fa-bolt", "fa fa-qq"];
+
+
 const cardsContainer = document.querySelector(".deck");
 let openedCards = [];
 let matchedCards = [];
+const repeatBtn = document.querySelector(".features .play-again");
+const repeatBtnFromModal = document.querySelector(".modal .play-again");
 /*
 *Initialize the game
 */
 function init() {
+  shuffle(icons);
   for (let i =0; i < icons.length; i++){
     const card = document.createElement("li");
     card.classList.add("card");
@@ -20,8 +25,15 @@ function init() {
 /*
 *click event
 */
+let isFirstClick = true;
 function click(card){
   card.addEventListener("click", function() {
+    if(isFirstClick) {
+            // Start our timer
+            startTimer();
+            // Change our First Click indicator's value
+            isFirstClick = false;
+        }
     const currentCard = this;
     const previousCard = openedCards[0];
     if (openedCards.length === 1){
@@ -55,13 +67,46 @@ function compare(currentCard, previousCard){
   }
   addMove()
 }
+
 /*
 *ending the game
 */
 function isOver (){
   if (matchedCards.length === icons.length){
-    alert("Booya!");
-  }
+    // If the game is finished display modal
+gameOverMessage();
+}
+}
+const modal = document.querySelector('.modal');
+
+// Game Over Message Modal
+function gameOverMessage() {
+
+// Display modal box
+modal.style.display = "block";
+
+// Select the Moves
+const modalMoves = document.querySelector("#moves");
+// Change its value to the user moves
+modalMoves.innerHTML = `${moves} moves to complete!`;
+// Select the time
+const modalSeconds = document.querySelector('#totalSeconds');
+// Change time value to the user seconds
+modalSeconds.innerHTML = `${totalSeconds} seconds to complete!`;
+// Select the rate
+const modalRate = document.querySelector('#star');
+// Change time value to the user seconds
+modalRate.innerHTML = `${star} stars!`;
+stopTimer();
+document.querySelector(".init").addEventListener("click", function() {
+    reset();
+  modal.style.display = "none";
+
+ });
+}
+//stop timer
+function stopTimer() {
+    clearInterval(liveTimer);
 }
 /*
 *Move counter
@@ -78,19 +123,35 @@ function addMove (){
 *Rating
 */
 const starsContainer = document.querySelector(".stars");
+const star = `<li><i class="fa fa-star"></i></li>`;
 function rating(){
   switch(moves) {
-    case 20:
-      starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
-      <li><i class="fa fa-star"></i></li>`;
+    case 5:
+      starsContainer.innerHTML = star + star
     break;
-    case 25:
-      starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>`;
+    case 10:
+      starsContainer.innerHTML = star;
     break;
-    case 30:
+    case 15:
       starsContainer.innerHTML = `<li><i class="fa fa-bomb"></i></li>`;
     break;
+    case 20:
+      starsContainer.innerHTML = "Just stop already";
+    break;
   }
+}
+/*
+ * Timer
+ */
+const timerContainer = document.querySelector(".timer");
+let liveTimer,
+    totalSeconds = 0;
+timerContainer.innerHTML = totalSeconds + 's';
+function startTimer() {
+    liveTimer = setInterval(function() {
+        totalSeconds++;
+        timerContainer.innerHTML = totalSeconds + 's';
+    }, 1000);
 }
 /*
 *Restart Button
@@ -99,23 +160,26 @@ const restartBtn = document.querySelector(".restart");
 restartBtn.addEventListener("click", function(){
   cardsContainer.innerHTML = "";
   init();
-  matchedCards = [];
-  moves = 0;
-  movesContainer.innerHTML = moves;
-  shuffle(icons);
+  reset();
 })
-//////////////////Start Game for first time
-shuffle(icons);
-init();
-//////////////////////////////////UDACITY SHUFFLE CODE/////////////////////////
 /*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
+ * function to Reset All Game Variables
  */
+ function reset() {
+     matchedCards = [];
+     moves = 0;
+     movesContainer.innerHTML = moves;
+     starsContainer.innerHTML = star + star + star;
+     stopTimer();
+     isFirstClick = true;
+     totalSeconds = 0;
+     timerContainer.innerHTML = totalSeconds + "s";
+ }
+//////////////////Start Game for first time
+init();
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+//////////////////////////////////SHUFFLE CODE/////////////////////////
+
 function shuffle(icons) {
     var currentIndex = icons.length, temporaryValue, randomIndex;
 
@@ -129,15 +193,3 @@ function shuffle(icons) {
 
     return icons;
 }
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */

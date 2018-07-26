@@ -32,7 +32,9 @@ h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
 }
-
+.hidden {
+    display: none !important;
+  }
 /*
  * Styles for the deck of cards
  */
@@ -69,6 +71,7 @@ h1 {
     transform: rotateY(0);
     background: #02b3e4;
     cursor: default;
+    animation: flip .5s ease;
 }
 
 .deck .card.show {
@@ -91,6 +94,8 @@ h1 {
     text-align: left;
     width: 345px;
     margin-bottom: 10px;
+    display: flex;
+   justify-content: space-around;
 }
 
 .score-panel .stars {
@@ -108,4 +113,21 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+.modal {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  transition: all 450ms ease;
+}
+
+.modal .inner {
+  width: 50%;
+  margin: 10% auto;
+  padding: 2em;
+  text-align: center;
+  box-shadow: 0px 0px 4px 1px #d4d4d4b3;
+  background-color: white;
 }
