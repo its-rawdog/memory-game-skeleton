@@ -17,7 +17,7 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background: linear-gradient(160deg, #000000 0%, #434343 100%);
     font-family: 'Coda', cursive;
 }
 
@@ -31,6 +31,7 @@ body {
 h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
+    color: white;
 }
 .hidden {
     display: none !important;
@@ -40,9 +41,9 @@ h1 {
  */
 
 .deck {
-    width: 660px;
-    min-height: 680px;
-    background: linear-gradient(160deg, #ff4b1f 0%, #1fddff 100%);
+    width: 600px;
+    min-height: 620px;
+    background: #1a1a1a;
     padding: 32px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
@@ -54,9 +55,9 @@ h1 {
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
-    background: #2C5364;
+    height: 110px;
+    width: 110px;
+    background: linear-gradient(160deg, #65c4fe 0%, #8e50d3 100%);
     font-size: 0px;
     color: #ffffff;
     border-radius: 8px;
@@ -64,7 +65,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    box-shadow: 5px 2px 20px 0 #414345;
 }
 
 .deck .card.open {
@@ -95,7 +96,8 @@ h1 {
     width: 345px;
     margin-bottom: 10px;
     display: flex;
-   justify-content: space-around;
+    justify-content: space-around;
+    color: white;
 }
 
 .score-panel .stars {
@@ -128,6 +130,6 @@ h1 {
   margin: 10% auto;
   padding: 2em;
   text-align: center;
-  box-shadow: 0px 0px 4px 1px #d4d4d4b3;
-  background-color: white;
+  box-shadow: 0px 0px 4px 1px #82f6d9;
+  background-color: #1a1a1a;
 }
